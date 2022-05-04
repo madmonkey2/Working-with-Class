@@ -1,0 +1,46 @@
+class Vector:
+    def __init__(self, *coordinates):
+        self.coordinates = coordinates
+
+    def add(self, other):
+        a = []
+        for coordinate1, coordinate2 in zip(self.coordinates, other.coordinates):
+            a.append(coordinate1 + coordinate2)
+        return self.__class__(*a)
+
+    def dot(self, other):
+        sum1 = 0
+        for coordinate1, coordinate2 in zip(self.coordinates, other.coordinates):
+            sum1 += coordinate1 * coordinate2
+        return sum1
+
+    def scale(self, other):
+        a = []
+        for coordinate in self.coordinates:
+            a.append(coordinate * other)
+        return self.__class__(*a)
+
+    def magnitude(self):
+        a = 0
+        for coordinate in self.coordinates:
+            a += coordinate ** 2
+        return int(abs((a**(1 / 2))))
+
+    def direction(self):
+        a = []
+        for coordinate in self.coordinates:
+            a.append(coordinate / self.magnitude())
+        return self.__class__(*a)
+
+    def __repr__(self):
+        return self.__class__.__name__ + str(self.coordinates)
+
+
+x = Vector(0, 3, 4, 0)
+y = Vector(0, -3, 1, -4)
+other = int(input("Enter a number to scale x with: "))
+print(x.add(y))
+print(x.dot(y))
+print(x.scale(other))
+print(x.magnitude())
+print(x.direction())
